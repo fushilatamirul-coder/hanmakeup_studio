@@ -31,7 +31,7 @@
         ::-webkit-scrollbar-track { background: #f0e2d9; }
         ::-webkit-scrollbar-thumb { background: #c7a17a; border-radius: 10px; }
 
-        /* Navbar - Simple */
+        /* Navbar - Simple tanpa icon */
         .navbar {
             position: fixed;
             top: 0;
@@ -52,11 +52,21 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 0; /* tidak ada gap karena ikon dihilangkan */
         }
-        .logo i { font-size: 1.6rem; color: #c27e54; }
-        .logo-text { font-size: 1.3rem; font-weight: 700; color: #4a2e2a; }
-        .logo-text span { color: #c27e54; }
+        /* Ikon kecil已经完全移除，不再显示 */
+        .logo i {
+            display: none;
+        }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4a2e2a;
+            letter-spacing: -0.3px;
+        }
+        .logo-text span {
+            color: #c27e54;
+        }
         .menu-toggle {
             display: block;
             font-size: 1.8rem;
@@ -392,11 +402,11 @@
 </head>
 <body>
 
-<!-- Navbar Sederhana -->
+<!-- Navbar Sederhana TANPA IKON -->
 <div class="navbar">
     <div class="nav-container">
         <div class="logo">
-            <i class="fas fa-brush"></i>
+            <!-- Ikon kecil telah dihilangkan sesuai permintaan -->
             <div class="logo-text">HAN <span>Makeup</span></div>
         </div>
         <button class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></button>

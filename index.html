@@ -7,123 +7,263 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- [Previous Tailwind config dan styles tetap sama - disingkat untuk fokus pada perubahan] -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Palette LUXURY FEMININE yang lebih soft & premium
+                        'blush-primary': '#F9E4E8',      // Blush pink lembut
+                        'blush-dark': '#F4C2D0',         // Blush pink gelap
+                        'nude-primary': '#F8E8D9',       // Nude krem
+                        'nude-dark': '#E8D5B8',          // Nude coklat muda
+                        'cream-primary': '#FDFAF5',      // Cream putih susu
+                        'gold-primary': '#E8C547',       // Gold lembut
+                        'gold-dark': '#D4A837',          // Gold tua
+                        'brown-soft': '#D9B99D',         // Brown lembut
+                        'rose-gold': '#E8B4A3',          // Rose gold
+                    },
+                    fontFamily: {
+                        'playfair': ['Playfair Display', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                    }
+                }
+            },
+            screens: {
+                'xs': '475px',
+                'sm': '640px',
+                'md': '768px',
+                'lg': '1024px',
+                'xl': '1280px',
+            }
+        }
+    </script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Google Fonts Optimized -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [Previous styles tetap sama] */
-        
-        /* Modal Service Overlay */
-        .service-modal {
-            backdrop-filter: blur(20px);
-            background: rgba(249, 228, 232, 0.95);
+        /* MOBILE-FIRST Glassmorphism */
+        .glass {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         }
         
-        /* Service Form Animations */
-        .service-form-enter {
-            transform: translateY(50px) scale(0.95);
-            opacity: 0;
+        .glass-dark {
+            backdrop-filter: blur(16px);
+            background: rgba(248, 229, 233, 0.25);
+            border: 1px solid rgba(232, 197, 208, 0.4);
+        }
+
+        /* Floating Animation Optimized */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-12px) rotate(2deg); }
+            66% { transform: translateY(-6px) rotate(-1deg); }
         }
         
-        .service-form-enter-active {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        /* Glow Pulse untuk Mobile */
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(232, 197, 208, 0.4);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(232, 197, 208, 0.8), 0 0 60px rgba(232, 197, 208, 0.4);
+            }
+        }
+
+        /* Mobile Optimized Scrollbar */
+        @media (hover: hover) {
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { background: rgba(253, 250, 245, 0.5); }
+            ::-webkit-scrollbar-thumb { 
+                background: linear-gradient(180deg, #E8C547, #D4A837);
+                border-radius: 3px;
+            }
+        }
+
+        /* Hero Gradient Background */
+        .hero-gradient {
+            background: linear-gradient(135deg, 
+                #F9E4E8 0%, 
+                #F8E8D9 25%, 
+                #FDFAF5 50%, 
+                #F8E8D9 75%, 
+                #F9E4E8 100%);
+        }
+
+        /* Mobile Hero Parallax */
+        .hero-bg {
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg {
+                background-attachment: scroll;
+            }
+        }
+
+        /* Prevent Body Scroll on Mobile Menu */
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
     </style>
 </head>
 <body class="font-poppins bg-cream-primary overflow-x-hidden antialiased">
 
-    <!-- [Previous sections: Loading, Navbar, Hero tetap sama] -->
+    <!-- Loading Screen Optimized Mobile -->
+    <div id="loadingScreen" class="fixed inset-0 bg-gradient-to-br from-blush-primary to-nude-primary flex items-center justify-center z-[9999] transition-opacity duration-500">
+        <div class="text-center p-8">
+            <div class="relative w-20 h-20 mx-auto mb-6">
+                <div class="absolute inset-0 w-20 h-20 bg-gradient-to-r from-gold-primary to-gold-dark rounded-full animate-pulse-glow blur-sm"></div>
+                <div class="relative w-20 h-20 bg-cream-primary rounded-full flex items-center justify-center shadow-2xl">
+                    <span class="text-3xl font-playfair text-gold-primary drop-shadow-lg">✨</span>
+                </div>
+            </div>
+            <h2 class="text-2xl font-playfair font-bold text-brown-soft mb-2 leading-tight">Han Makeup</h2>
+            <p class="text-nude-dark text-sm font-medium tracking-wide">Memuat pesona...</p>
+        </div>
+    </div>
 
-    <!-- Pelayanan Section - DENGAN MODAL FORM -->
+    <!-- Navigation Bar - MOBILE FIRST -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 glass px-4 md:px-6 lg:px-8 py-4 md:py-5 transition-all duration-500">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo - Compact untuk Mobile -->
+            <a href="#beranda" class="flex items-center space-x-2 md:space-x-3 group">
+                <div class="w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blush-primary to-gold-primary rounded-2xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-all duration-300">
+                    <span class="text-xl md:text-2xl font-playfair font-bold text-white drop-shadow-sm">H</span>
+                </div>
+                <div class="hidden xs:block">
+                    <h1 class="font-playfair text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-gold-dark via-gold-primary to-rose-gold bg-clip-text text-transparent leading-tight">
+                        Han Makeup
+                    </h1>
+                    <p class="text-xs md:text-sm text-nude-dark font-medium tracking-wide opacity-80">Wonosobo</p>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex items-center space-x-1 md:space-x-2 lg:space-x-6 xl:space-x-8">
+                {['Beranda','Pelayanan','Portofolio','Produk','Ulasan','Lokasi','Kontak'].map((item, i) => (
+                    <li key={i}>
+                        <a href={`#${item.toLowerCase()}`} class="nav-link text-white/90 px-3 py-2 md:px-4 lg:px-0 font-medium text-sm lg:text-base relative group hover:text-gold-primary transition-all duration-400 rounded-lg backdrop-blur-sm hover:bg-white/10">
+                            {item}
+                            <span class="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blush-primary to-gold-primary group-hover:w-full transition-all duration-400 transform -translate-x-1/2"></span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300">
+                <svg id="hamburgerIcon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <svg id="closeIcon" class="w-6 h-6 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Fullscreen Menu -->
+        <div id="mobileMenu" class="md:hidden fixed inset-0 bg-cream-primary/95 backdrop-blur-3xl z-40 transform -translate-x-full transition-transform duration-500 ease-in-out">
+            <div class="flex flex-col h-full pt-24 px-6 pb-12 space-y-8">
+                <div class="flex-1 flex flex-col justify-center space-y-6">
+                    {['Beranda','Pelayanan','Portofolio','Produk','Ulasan','Lokasi','Kontak'].map((item, i) => (
+                        <a key={i} href={`#${item.toLowerCase()}`} class="text-2xl font-playfair font-semibold text-brown-soft hover:text-gold-primary transition-all duration-400 py-3 px-4 rounded-2xl backdrop-blur-sm hover:bg-blush-primary/50 border-r-4 border-transparent hover:border-gold-primary">
+                            {item}
+                        </a>
+                    ))}
+                </div>
+                <!-- Quick Contact Mobile -->
+                <div class="pt-8 border-t border-nude-primary/30 space-y-4">
+                    <a href="https://wa.me/6281234567890" class="block w-full bg-gradient-to-r from-gold-primary to-gold-dark text-white py-4 px-6 rounded-2xl text-lg font-semibold text-center hover:shadow-2xl hover:shadow-gold-primary/50 transform hover:-translate-y-1 transition-all duration-400">
+                        💬 Chat WhatsApp
+                    </a>
+                    <p class="text-center text-sm text-nude-dark">📍 Wonosobo, Jawa Tengah</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - MOBILE OPTIMIZED -->
+    <section id="beranda" class="min-h-screen hero-gradient relative overflow-hidden pt-20 md:pt-28 hero-bg" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1608252045818-9bf3a7824d89?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <!-- Mobile Floating Elements -->
+        <div class="absolute top-24 left-4 w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-blush-primary/40 rounded-full animate-float-slow blur-sm md:blur-md"></div>
+        <div class="absolute top-1/2 right-4 w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-gold-primary/30 rounded-full animate-float-slow" style="animation-delay: -2s;"></div>
+        <div class="absolute bottom-28 left-8 w-20 h-20 md:w-24 md:h-24 bg-nude-primary/40 rounded-full animate-float-slow" style="animation-delay: -4s;"></div>
+        <div class="absolute bottom-20 right-8 w-12 h-12 md:w-16 md:h-16 bg-cream-primary/60 rounded-full animate-pulse-glow"></div>
+
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20 h-screen flex flex-col justify-center items-center text-center text-white relative z-10 py-12">
+            <div class="max-w-md md:max-w-3xl lg:max-w-4xl mx-auto space-y-6 md:space-y-8" data-aos="fade-up" data-aos-duration="1200">
+                <h1 class="font-playfair text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-white via-cream-primary to-nude-primary bg-clip-text drop-shadow-2xl md:drop-shadow-3xl">
+                    Han Makeup Studio
+                </h1>
+                <p class="font-poppins text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 font-light leading-relaxed max-w-2xl mx-auto px-2 md:px-0">
+                    Makeup profesional untuk momen spesial Anda. Wisuda, Wedding, Event & Home Service di Wonosobo.
+                </p>
+                <div class="flex flex-col xs:flex-row gap-4 xs:gap-6 justify-center items-center px-4">
+                    <a href="#kontak" class="group w-full xs:w-auto bg-gradient-to-r from-gold-primary to-gold-dark text-white px-8 xs:px-12 py-4 md:py-5 rounded-2xl font-semibold text-base md:text-lg shadow-2xl md:shadow-3xl hover:shadow-gold-primary/50 transform hover:-translate-y-2 hover:scale-105 transition-all duration-500 font-poppins tracking-wide">
+                        <span class="group-hover:hidden block">Booking Sekarang</span>
+                        <span class="hidden group-hover:block">Mulai Pesan ✨</span>
+                    </a>
+                    <a href="#portofolio" class="w-full xs:w-auto border-2 border-white/60 text-white px-8 xs:px-12 py-4 md:py-5 rounded-2xl font-semibold text-base md:text-lg hover:bg-white hover:text-gold-dark transition-all duration-500 backdrop-blur-sm hover:shadow-2xl transform hover:-translate-y-1 font-poppins">
+                        Lihat Portofolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pelayanan Section - Mobile Cards -->
     <section id="pelayanan" class="py-20 md:py-28 lg:py-32 bg-cream-primary/80">
         <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20">
             <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
                 <h2 class="font-playfair text-3xl xs:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gold-dark via-gold-primary to-rose-gold bg-clip-text text-transparent mb-4 md:mb-6 drop-shadow-lg">
-                    Layanan Makeup
+                    Layanan Kami
                 </h2>
                 <p class="text-lg md:text-xl text-nude-dark font-light max-w-2xl mx-auto leading-relaxed px-2">
-                    Pilih layanan yang sesuai dengan momen spesial Anda
+                    Pilihan makeup profesional untuk setiap momen istimewa Anda
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {[
-                    { 
-                        id: 'wisuda', 
-                        title: 'Makeup Wisuda', 
-                        desc: 'Look natural glowing tahan lama untuk hari kelulusan tak terlupakan', 
-                        icon: '🎓', 
-                        color: 'from-blush-primary to-blush-dark',
-                        price: 'Rp 250.000 - Rp 400.000',
-                        duration: '2-3 jam'
-                    },
-                    { 
-                        id: 'wedding', 
-                        title: 'Makeup Wedding', 
-                        desc: 'Makeup pengantin mewah romantis untuk hari paling bahagia', 
-                        icon: '💍', 
-                        color: 'from-nude-primary to-rose-gold',
-                        price: 'Rp 1.200.000 - Rp 2.500.000',
-                        duration: '4-6 jam'
-                    },
-                    { 
-                        id: 'event', 
-                        title: 'Makeup Event', 
-                        desc: 'Glamour untuk pesta, formal & acara spesial', 
-                        icon: '✨', 
-                        color: 'from-gold-primary to-gold-dark',
-                        price: 'Rp 350.000 - Rp 600.000',
-                        duration: '2-4 jam'
-                    },
-                    { 
-                        id: 'home', 
-                        title: 'Home Service', 
-                        desc: 'Tim profesional datang ke lokasi dengan peralatan lengkap', 
-                        icon: '🚗', 
-                        color: 'from-cream-primary to-nude-primary',
-                        price: '+ Rp 150.000 / 10km',
-                        duration: 'Tambahan 1 jam'
-                    },
-                    { 
-                        id: 'special', 
-                        title: 'Special Moments', 
-                        desc: 'Prewedding, birthday, photoshoot custom', 
-                        icon: '📸', 
-                        color: 'from-rose-gold to-blush-primary',
-                        price: 'Rp 400.000 - Rp 800.000',
-                        duration: '3-5 jam'
-                    }
+                    {title: 'Makeup Wisuda', desc: 'Look natural glowing tahan lama untuk hari kelulusan tak terlupakan', icon: '🎓', color: 'from-blush-primary to-blush-dark', delay: 100},
+                    {title: 'Makeup Wedding', desc: 'Makeup pengantin mewah romantis untuk hari paling bahagia', icon: '💍', color: 'from-nude-primary to-rose-gold', delay: 200},
+                    {title: 'Makeup Event', desc: 'Glamour untuk pesta, formal & acara spesial', icon: '✨', color: 'from-gold-primary to-gold-dark', delay: 300},
+                    {title: 'Home Service', desc: 'Tim profesional datang ke lokasi dengan peralatan lengkap', icon: '🚗', color: 'from-cream-primary to-nude-primary', delay: 400},
+                    {title: 'Special Moments', desc: 'Prewedding, birthday, photoshoot custom', icon: '📸', color: 'from-rose-gold to-blush-primary', delay: 500}
                 ].map((service, i) => (
-                    <div key={i} class="service-card group relative bg-white/85 glass-dark rounded-3xl p-6 md:p-8 lg:p-10 shadow-xl hover:shadow-2xl hover:shadow-gold-primary/20 hover:-translate-y-4 md:hover:-translate-y-6 transition-all duration-700 cursor-pointer overflow-hidden h-full" 
-                         data-aos="fade-up" data-aos-delay={100 * (i+1)}
-                         onclick={`openServiceModal('${service.id}', '${service.title}', '${service.desc}', '${service.price}', '${service.duration}')`}>
-                        
-                        <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity duration-700" 
-                             style={`background: linear-gradient(135deg, ${service.color.replace('from-', '').replace('to-', ', ')})`}></div>
-                        
-                        <div class="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto mb-6 bg-gradient-to-r rounded-2xl flex items-center justify-center text-2xl md:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-700 shadow-2xl">
+                    <div key={i} class="group relative bg-white/85 glass-dark rounded-3xl p-6 md:p-8 lg:p-10 shadow-xl hover:shadow-2xl hover:shadow-gold-primary/20 hover:-translate-y-4 md:hover:-translate-y-6 transition-all duration-700 cursor-pointer overflow-hidden h-full" 
+                         data-aos="fade-up" data-aos-delay={service.delay}>
+                        <div class="absolute inset-0 bg-gradient-to-br {service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-700"></div>
+                        <div class="relative w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 mx-auto mb-6 bg-gradient-to-r {service.color} rounded-2xl flex items-center justify-center text-2xl md:text-3xl lg:text-4xl group-hover:scale-110 transition-transform duration-700 shadow-2xl">
                             <span class="drop-shadow-lg">{service.icon}</span>
                         </div>
-                        
                         <h3 class="font-playfair text-xl md:text-2xl lg:text-2xl font-bold text-brown-soft mb-4 text-center group-hover:text-gold-primary transition-all duration-500 leading-tight">
                             {service.title}
                         </h3>
-                        
-                        <p class="text-nude-dark text-center leading-relaxed opacity-90 group-hover:text-brown-soft transition-all duration-500 text-sm md:text-base mb-6">
+                        <p class="text-nude-dark text-center leading-relaxed opacity-90 group-hover:text-brown-soft transition-all duration-500 text-sm md:text-base">
                             {service.desc}
                         </p>
-                        
-                        <div class="text-center space-y-2 mb-8 opacity-0 group-hover:opacity-100 transition-all duration-700">
-                            <div class="text-gold-primary font-bold text-lg">{service.price}</div>
-                            <div class="text-nude-dark text-sm">⏱️ {service.duration}</div>
-                        </div>
-                        
-                        <div class="flex items-center justify-center gap-3 pt-4 border-t border-nude-primary/30 opacity-0 group-hover:opacity-100 transition-all duration-700">
-                            <button class="px-6 py-3 bg-gradient-to-r from-gold-primary to-gold-dark text-white rounded-xl font-semibold text-sm md:text-base shadow-lg hover:shadow-gold-primary/50 transform hover:-translate-y-1 transition-all duration-400 tracking-wide">
-                                Pesan Sekarang
-                            </button>
-                            <span class="text-xs text-nude-dark font-medium">Klik card</span>
+                        <div class="flex flex-wrap gap-2 justify-center mt-6 opacity-0 group-hover:opacity-100 transition-all duration-700">
+                            <span class="px-3 py-2 bg-white/60 text-xs md:text-sm font-medium text-brown-soft rounded-full backdrop-blur-sm">Studio</span>
+                            <span class="px-3 py-2 bg-white/60 text-xs md:text-sm font-medium text-brown-soft rounded-full backdrop-blur-sm">Home Service</span>
                         </div>
                     </div>
                 ))}
@@ -131,265 +271,479 @@
         </div>
     </section>
 
-    <!-- SERVICE MODAL - FULLSCREEN MOBILE -->
-    <div id="serviceModal" class="service-modal fixed inset-0 z-[999] hidden flex-col items-center justify-center p-4 md:p-8 overflow-y-auto">
-        <!-- Close Button -->
-        <button onclick="closeServiceModal()" class="absolute top-6 right-6 md:top-8 md:right-8 z-10 p-3 md:p-4 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300">
-            <svg class="w-6 h-6 md:w-7 md:h-7 text-brown-soft" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
+    <!-- Portfolio - Mobile Masonry -->
+    <section id="portofolio" class="py-20 md:py-28 lg:py-32 bg-gradient-to-br from-blush-primary/20 to-cream-primary/50">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20">
+            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                <h2 class="font-playfair text-3xl xs:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gold-primary via-gold-dark to-blush-dark bg-clip-text text-transparent mb-4 md:mb-6 drop-shadow-xl">
+                    Portofolio Terbaik
+                </h2>
+                <p class="text-lg md:text-xl text-nude-dark font-light max-w-2xl mx-auto leading-relaxed">
+                    Karya makeup yang telah mempesona ratusan klien
+                </p>
+            </div>
 
-        <!-- Modal Content -->
-        <div id="modalContent" class="service-form-enter bg-white/95 glass-dark rounded-3xl md:rounded-[3rem] shadow-2xl shadow-gold-primary/30 max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-4 md:mx-auto transform transition-all duration-500">
-            <!-- Service Header -->
-            <div class="p-8 md:p-12 text-center border-b border-nude-primary/30">
-                <div id="modalIcon" class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 bg-gradient-to-r rounded-2xl flex items-center justify-center text-4xl md:text-5xl shadow-2xl mx-auto"></div>
-                <h2 id="modalTitle" class="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-gold-dark via-gold-primary to-rose-gold bg-clip-text text-transparent mb-4 drop-shadow-xl"></h2>
-                <p id="modalDesc" class="text-xl md:text-2xl text-nude-dark font-light max-w-2xl mx-auto leading-relaxed mb-2"></p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-6">
-                    <div id="modalPrice" class="text-2xl md:text-3xl font-bold text-gold-primary bg-blush-primary/50 px-6 py-3 rounded-2xl shadow-lg"></div>
-                    <div id="modalDuration" class="text-lg md:text-xl text-nude-dark font-medium bg-white/60 px-6 py-3 rounded-2xl backdrop-blur-sm">⏱️ Durasi</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12">
+                {[
+                    {img: 'https://images.unsplash.com/photo-1608252045818-9bf3a7824d89?w=500&q=80', label: 'Wisuda', title: 'Natural Glow', aspect: 'aspect-[4/5] md:aspect-[4/3]'},
+                    {img: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&q=80', label: 'Wedding', title: 'Bridal Elegan', aspect: 'aspect-square md:aspect-[4/3]'},
+                    {img: 'https://images.unsplash.com/photo-1611100481087-2eb83c6dd97b?w=500&q=80', label: 'Event', title: 'Glamour Party', aspect: 'aspect-[4/5] md:aspect-[4/3]'},
+                    {img: 'https://images.unsplash.com/photo-1625772299848-361b803ffa29?w=500&q=80', label: 'Special', title: 'Prewedding', aspect: 'aspect-[3/4] md:aspect-square lg:aspect-[4/3]'},
+                    {img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500&q=80', label: 'Wisuda', title: 'Fresh Graduate', aspect: 'aspect-square md:aspect-[4/3]'},
+                    {img: 'https://images.unsplash.com/photo-1438761684358-2eb83c6dd97b?w=500&q=80', label: 'Event', title: 'Corporate', aspect: 'aspect-[3/4] lg:aspect-square'}
+                ].map((item, i) => (
+                    <div key={i} class={`group relative overflow-hidden rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl hover:shadow-gold-primary/30 hover:shadow-2xl transition-all duration-700 cursor-pointer ${item.aspect}`} data-aos="fade-up" data-aos-delay={100 * (i+1)}>
+                        <img src={item.img} alt={item.title} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 flex flex-col justify-end p-4 md:p-6">
+                            <span class="inline-block bg-gold-primary/95 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold mb-2 backdrop-blur-sm"> {item.label} </span>
+                            <h3 class="font-playfair text-lg md:text-2xl text-white font-bold opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 leading-tight">
+                                {item.title}
+                            </h3>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div class="text-center" data-aos="fade-up" data-aos-delay="700">
+                <a href="#kontak" class="inline-block bg-gradient-to-r from-gold-primary to-gold-dark text-white px-8 md:px-12 py-4 md:py-6 rounded-2xl font-semibold text-base md:text-xl shadow-2xl hover:shadow-gold-primary/50 transform hover:-translate-y-2 transition-all duration-500 font-poppins tracking-wide">
+                    Lihat Semua Karya
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produk Section - Mobile Grid -->
+    <section id="produk" class="py-20 md:py-28 bg-white/70">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20">
+            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                <h2 class="font-playfair text-3xl xs:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blush-primary via-gold-primary to-rose-gold bg-clip-text text-transparent mb-4 md:mb-6 drop-shadow-lg">
+                    Produk Premium
+                </h2>
+                <p class="text-lg md:text-xl text-nude-dark font-light max-w-2xl mx-auto leading-relaxed">
+                    Beauty products berkualitas tinggi untuk makeup flawless
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                {[
+                    {name: 'Premium Foundation', price: 'Rp 350.000', desc: 'Coverage sempurna, tahan lama 12+ jam', img: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&q=80'},
+                    {name: 'Matte Lipstick Set', price: 'Rp 280.000', desc: '6 warna matte, pigmentasi tinggi', img: 'https://images.unsplash.com/photo-1574169208507-84376144848b?w=500&q=80'},
+                    {name: 'Eyeshadow Pro', price: 'Rp 450.000', desc: '24 warna blendable untuk look profesional', img: 'https://images.unsplash.com/photo-1606761564358-8e08b74448e7?w=500&q=80'}
+                ].map((product, i) => (
+                    <div key={i} class="group bg-white/90 glass rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl hover:shadow-2xl hover:shadow-gold-primary/20 hover:-translate-y-3 transition-all duration-600 overflow-hidden h-full" data-aos="fade-up" data-aos-delay={100 * (i+1)}>
+                        <div class="relative overflow-hidden rounded-xl md:rounded-2xl mb-6 h-48 md:h-64">
+                            <img src={product.img} alt={product.name} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                        </div>
+                        <h3 class="font-playfair text-xl md:text-2xl font-bold text-brown-soft mb-3 group-hover:text-gold-primary transition-all duration-400 leading-tight">
+                            {product.name}
+                        </h3>
+                        <p class="text-nude-dark mb-6 leading-relaxed text-sm md:text-base group-hover:text-brown-soft transition-all duration-400">
+                            {product.desc}
+                        </p>
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="text-2xl md:text-3xl font-bold text-gold-primary">{product.price}</span>
+                            <div class="flex gap-0.5 md:gap-1 text-gold-primary text-lg md:text-xl">
+                                {'★★★★★'.split('').map((_, j) => <span key={j}>★</span>)}
+                            </div>
+                        </div>
+                        <a href="#" class="w-full bg-gradient-to-r from-gold-primary to-gold-dark text-white py-4 px-6 rounded-xl md:rounded-2xl font-semibold text-base md:text-lg text-center block hover:shadow-gold-primary/50 transform hover:-translate-y-1 transition-all duration-400 tracking-wide">
+                            Beli Sekarang
+                        </a>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+
+    <!-- Ulasan - Mobile Carousel Optimized -->
+    <section id="ulasan" class="py-20 md:py-28 bg-gradient-to-br from-rose-gold/10 via-blush-primary/20 to-cream-primary">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20">
+            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                <h2 class="font-playfair text-3xl xs:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gold-primary via-gold-dark to-blush-dark bg-clip-text text-transparent mb-4 md:mb-6 drop-shadow-xl">
+                    Apa Kata Pelanggan
+                </h2>
+                <p class="text-lg md:text-xl text-nude-dark font-light max-w-2xl mx-auto leading-relaxed">
+                    Ribuan wanita puas dengan hasil makeup kami
+                </p>
+            </div>
+
+            <div class="relative max-w-2xl mx-auto overflow-hidden rounded-3xl" data-aos="fade-up" data-aos-delay="100">
+                <div id="testimonialCarousel" class="flex transition-transform duration-1000 ease-in-out h-80 md:h-96">
+                    {[
+                        {name: 'Sari Wulandari', role: 'Wisuda 2024', text: 'Makeup wisuda luar biasa! Tahan lama & natural glowing. Sangat recommended!', img: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&q=80'},
+                        {name: 'Ratih Ayu', role: 'Pengantin 2023', text: 'Home service wedding super memuaskan! Tim profesional & hasil stunning!', img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&q=80'},
+                        {name: 'Dewi Sartika', role: 'Event Nov 2023', text: 'Makeup event gala dinner memukau! Semua orang memuji hasilnya!', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&q=80'}
+                    ].map((review, i) => (
+                        <div key={i} class="flex-shrink-0 w-full text-center p-6 md:p-12">
+                            <div class="bg-white/90 glass-dark rounded-3xl p-8 md:p-10 shadow-2xl mx-auto max-w-sm h-full flex flex-col justify-center">
+                                <div class="w-20 h-20 md:w-24 md:h-24 mx-auto mb-6 bg-gradient-to-r from-blush-primary to-gold-primary rounded-full flex items-center justify-center overflow-hidden">
+                                    <img src={review.img} alt={review.name} class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover" loading="lazy">
+                                </div>
+                                <div class="flex gap-1 text-gold-primary text-2xl mx-auto mb-6 w-fit">
+                                    {'★★★★★'.split('').map((_, j) => <span key={j}>★</span>)}
+                                </div>
+                                <p class="text-nude-dark font-medium italic mb-6 leading-relaxed text-sm md:text-base px-2">
+                                    "{review.text}"
+                                </p>
+                                <div>
+                                    <h4 class="font-playfair text-xl md:text-2xl font-bold text-brown-soft">{review.name}</h4>
+                                    <p class="text-nude-dark text-sm">{review.role}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div class="flex justify-center gap-3 mt-8 md:mt-12">
+                    {[0,1,2].map(i => (
+                        <button key={i} class={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-500 ${i===0 ? 'bg-gold-primary scale-110 shadow-lg' : 'bg-white/50 hover:bg-gold-primary/80'}`}></button>
+                    ))}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lokasi - Mobile Split -->
+    <section id="lokasi" class="py-20 md:py-28 bg-white/80">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="font-playfair text-3xl xs:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gold-dark to-gold-primary bg-clip-text text-transparent mb-6 md:mb-8 drop-shadow-lg">
+                        Studio Kami
+                    </h2>
+                    <p class="text-lg md:text-xl text-nude-dark font-light mb-8 md:mb-12 leading-relaxed max-w-lg">
+                        Kunjungi studio nyaman dengan fasilitas lengkap
+                    </p>
+                    
+                    <div class="bg-white/90 glass rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-xl mb-8 md:mb-12">
+                        <h3 class="font-playfair text-2xl font-bold text-brown-soft mb-4 flex items-center gap-3">
+                            📍 Lokasi
+                        </h3>
+                        <p class="text-nude-dark mb-6 leading-relaxed text-sm md:text-base">Kalilang, Kayugiyang, Kec. Garung<br/>Kab. Wonosobo, Jawa Tengah 56353</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm md:text-base">
+                            <div class="flex items-start gap-3 p-3 bg-blush-primary/20 rounded-xl">
+                                <span class="text-xl mt-0.5">🕒</span>
+                                <div><span class="font-semibold text-brown-soft block">Jam Buka</span><span class="text-nude-dark">08:00 - 22:00</span></div>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 bg-nude-primary/20 rounded-xl">
+                                <span class="text-xl mt-0.5">📱</span>
+                                <div><span class="font-semibold text-brown-soft block">WhatsApp</span><span class="text-nude-dark">0812-3456-7890</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="https://share.google/1CsnuNJYvDzDOd8sM" target="_blank" class="block bg-gradient-to-r from-gold-primary to-gold-dark text-white py-4 px-6 rounded-2xl font-semibold text-base text-center hover:shadow-gold-primary/50 transform hover:-translate-y-1 transition-all duration-400 tracking-wide shadow-xl">
+                            🗺️ Buka Maps
+                        </a>
+                        <a href="#kontak" class="block border-2 border-gold-primary text-gold-primary py-4 px-6 rounded-2xl font-semibold text-base text-center hover:bg-gold-primary hover:text-white transition-all duration-400 backdrop-blur-sm hover:shadow-2xl transform hover:-translate-y-1">
+                            Booking
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative order-first lg:order-last" data-aos="fade-left" data-aos-delay="200">
+                    <div class="rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-gold-primary/20">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.282322179249!2d109.912345!3d-7.365432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNddiiMyNqs0Mjc0Ny4zNQ!5e0!3m2!1sid!2sid!4v1699999999999!5m2!1sid!2sid" 
+                            width="100%" height="350" md:height="400" 
+                            style="border:0; border-radius: 24px;" 
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak - Mobile Form -->
+    <section id="kontak" class="py-20 md:py-28 hero-gradient relative">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517457373958-b7bdd4587206?w=2070&q=80')] bg-cover bg-center opacity-10"></div>
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20 relative z-10">
+            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
+                <h2 class="font-playfair text-3xl xs:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-6 drop-shadow-2xl md:drop-shadow-3xl">
+                    Siap <span class="bg-gradient-to-r from-gold-primary to-gold-dark bg-clip-text text-transparent">Cantik</span>?
+                </h2>
+                <p class="text-xl md:text-2xl text-white/95 font-light max-w-xl mx-auto leading-relaxed drop-shadow-lg">
+                    Booking makeup profesional terbaik di Wonosobo
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <!-- Contact Info -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white/20 glass backdrop-blur-xl rounded-3xl p-6 md:p-10 mb-8 lg:mb-0">
+                        <h3 class="font-playfair text-2xl md:text-3xl font-bold text-white mb-8 drop-shadow-lg">Hubungi Kami</h3>
+                        <div class="space-y-6">
+                            <a href="https://wa.me/6281234567890" class="flex items-center gap-4 p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-400 group">
+                                <div class="w-14 h-14 bg-gradient-to-r from-gold-primary to-gold-dark rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-all duration-400">
+                                    <span class="text-2xl">📱</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white text-lg mb-1">WhatsApp</h4>
+                                    <p class="text-white/95 font-medium">0812-3456-7890</p>
+                                </div>
+                            </a>
+                            <a href="mailto:hanmakeup20@gmail.com" class="flex items-center gap-4 p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-400 group">
+                                <div class="w-14 h-14 bg-gradient-to-r from-blush-primary to-rose-gold rounded-2xl flex items-center justify-center flex-shrink-0 shadow-xl group-hover:scale-110 transition-all duration-400">
+                                    <span class="text-2xl">📧</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white text-lg mb-1">Email</h4>
+                                    <p class="text-white/95 font-medium">hanmakeup20@gmail.com</p>
+                                </div>
+                            </a>
+                            <div class="p-4 bg-white/30 rounded-2xl">
+                                <h4 class="font-semibold text-white text-lg mb-2">📍 Lokasi</h4>
+                                <p class="text-white/95 text-sm md:text-base">Wonosobo, Jawa Tengah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div>
+                    <form class="bg-white/20 glass backdrop-blur-xl rounded-3xl p-6 md:p-10 space-y-6" onsubmit="handleSubmit(event)">
+                        <div>
+                            <input type="text" placeholder="Nama Lengkap *" required 
+                                   class="w-full bg-white/70 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft placeholder-nude-dark focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 focus:ring-offset-transparent transition-all duration-400 text-base md:text-lg">
+                        </div>
+                        <div>
+                            <input type="tel" placeholder="Nomor WhatsApp *" required 
+                                   class="w-full bg-white/70 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft placeholder-nude-dark focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base md:text-lg">
+                        </div>
+                        <div>
+                            <select required class="w-full bg-white/70 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base md:text-lg appearance-none bg-no-repeat bg-right">
+                                <option value="">Pilih Layanan *</option>
+                                <option>Makeup Wisuda</option>
+                                <option>Makeup Wedding</option>
+                                <option>Makeup Event</option>
+                                <option>Home Service</option>
+                                <option>Special Moments</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-gold-primary to-gold-dark text-white py-5 md:py-6 px-8 rounded-2xl font-semibold text-lg md:text-xl shadow-2xl hover:shadow-gold-primary/50 transform hover:-translate-y-2 transition-all duration-500 font-poppins tracking-wide">
+                            💌 Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Mobile Compact -->
+    <footer class="bg-gradient-to-br from-gold-dark via-gold-primary to-rose-gold/80 py-12 md:py-16 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_25%_25%,white_0%,transparent_50%),radial-gradient(circle_at_75%_75%,white_0%,transparent_50%)]"></div>
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 xl:px-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
+                <!-- Logo -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-3 mb-6 md:mb-8 group">
+                        <div class="w-14 h-14 bg-white/20 backdrop-blur-xl rounded-2xl flex items-center justify-center shadow-xl group-hover:scale-110 transition-all duration-400">
+                            <span class="text-2xl font-playfair font-bold text-cream-primary">H</span>
+                        </div>
+                        <div>
+                            <h2 class="font-playfair text-2xl md:text-3xl font-bold leading-tight">Han Makeup Studio</h2>
+                            <p class="text-cream-primary/90 text-sm md:text-base font-medium opacity-90">Wonosobo #1 Makeup Artist</p>
+                        </div>
+                    </div>
+                    <p class="text-cream-primary/90 leading-relaxed mb-6 md:mb-8 text-sm md:text-base max-w-md px-1">
+                        Mengubah momen spesial menjadi kenangan indah dengan makeup profesional terbaik.
+                    </p>
+                    <a href="https://instagram.com/_hanmakeup20/" class="inline-flex items-center gap-3 px-6 py-3 bg-white/20 backdrop-blur-xl rounded-2xl hover:bg-white/40 transition-all duration-400 group">
+                        <svg class="w-5 h-5 fill-current text-cream-primary group-hover:text-gold-primary transition-colors" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        <span class="font-semibold text-cream-primary group-hover:text-gold-primary transition-colors">@_hanmakeup20</span>
+                    </a>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-playfair text-lg md:text-xl font-bold mb-6 text-cream-primary">Quick Links</h3>
+                    <ul class="space-y-3 md:space-y-4">
+                        {['Beranda','Pelayanan','Portofolio','Kontak'].map((item, i) => (
+                            <li key={i}><a href={`#${item.toLowerCase()}`} class="text-cream-primary/90 hover:text-white transition-all duration-300 block text-sm md:text-base hover:translate-x-2">{item}</a></li>
+                        ))}
+                    </ul>
+                </div>
+
+                <!-- Layanan -->
+                <div>
+                    <h3 class="font-playfair text-lg md:text-xl font-bold mb-6 text-cream-primary">Layanan</h3>
+                    <ul class="space-y-3 md:space-y-4">
+                        {['Wisuda','Wedding','Event','Home Service'].map((item, i) => (
+                            <li key={i}><a href="#" class="text-cream-primary/90 hover:text-white transition-all duration-300 block text-sm md:text-base hover:translate-x-2">{item}</a></li>
+                        ))}
+                    </ul>
                 </div>
             </div>
 
-            <!-- Booking Form -->
-            <form id="serviceForm" class="p-8 md:p-12 space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-brown-soft font-semibold mb-3 text-sm md:text-base tracking-wide">👤 Nama Lengkap *</label>
-                        <input type="text" id="customerName" required 
-                               class="w-full bg-white/80 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft placeholder-nude-dark focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base border border-nude-primary/50 hover:border-gold-primary/50" 
-                               placeholder="Nama lengkap Anda">
-                    </div>
-                    <div>
-                        <label class="block text-brown-soft font-semibold mb-3 text-sm md:text-base tracking-wide">📱 Nomor WhatsApp *</label>
-                        <input type="tel" id="customerPhone" required 
-                               class="w-full bg-white/80 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft placeholder-nude-dark focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base border border-nude-primary/50 hover:border-gold-primary/50" 
-                               placeholder="0812-3456-xxxx">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-brown-soft font-semibold mb-3 text-sm md:text-base tracking-wide">📅 Tanggal & Waktu *</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <input type="date" id="bookingDate" required 
-                               class="w-full bg-white/80 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base border border-nude-primary/50 hover:border-gold-primary/50">
-                        <input type="time" id="bookingTime" required 
-                               class="w-full bg-white/80 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base border border-nude-primary/50 hover:border-gold-primary/50">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-brown-soft font-semibold mb-3 text-sm md:text-base tracking-wide">📍 Alamat Lengkap *</label>
-                    <textarea id="customerAddress" rows="3" required 
-                              class="w-full bg-white/80 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft placeholder-nude-dark focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base border border-nude-primary/50 hover:border-gold-primary/50 resize-vertical"
-                              placeholder="Alamat lengkap lokasi makeup (jika home service)"></textarea>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-brown-soft font-semibold mb-3 text-sm md:text-base tracking-wide">👥 Jumlah Orang</label>
-                        <select id="personCount" class="w-full bg-white/80 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base border border-nude-primary/50 hover:border-gold-primary/50">
-                            <option value="1">1 Orang</option>
-                            <option value="2">2 Orang</option>
-                            <option value="3">3 Orang</option>
-                            <option value="4">4+ Orang (Custom)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-brown-soft font-semibold mb-3 text-sm md:text-base tracking-wide">💰 Catatan Khusus</label>
-                        <input type="text" id="specialNotes" 
-                               class="w-full bg-white/80 glass-dark rounded-2xl px-5 md:px-6 py-4 text-brown-soft placeholder-nude-dark focus:outline-none focus:ring-2 focus:ring-gold-primary focus:ring-offset-2 transition-all duration-400 text-base border border-nude-primary/50 hover:border-gold-primary/50" 
-                               placeholder="Contoh: Natural / Bold / Prewedding">
-                    </div>
-                </div>
-
-                <!-- WhatsApp Preview -->
-                <div class="bg-gradient-to-r from-emerald-400/20 to-green-400/20 border border-emerald-300/50 rounded-2xl p-6 backdrop-blur-sm">
-                    <h4 class="font-semibold text-emerald-800 mb-3 flex items-center gap-2">
-                        <span>📱</span> Pesan WhatsApp Preview
-                    </h4>
-                    <p id="whatsappPreview" class="text-sm md:text-base text-emerald-900 font-medium bg-white/80 p-4 rounded-xl backdrop-blur-sm whitespace-pre-wrap leading-relaxed"></p>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button type="submit" class="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 px-8 rounded-2xl font-semibold text-lg shadow-xl hover:shadow-emerald-500/50 transform hover:-translate-y-1 hover:scale-105 transition-all duration-400 tracking-wide flex items-center justify-center gap-3">
-                        <span>🚀 Kirim ke WhatsApp</span>
-                    </button>
-                    <button type="button" onclick="closeServiceModal()" class="flex-1 bg-white/80 glass-dark border border-nude-primary/50 text-brown-soft py-4 px-8 rounded-2xl font-semibold text-lg hover:bg-white hover:shadow-xl hover:shadow-gold-primary/20 transform hover:-translate-y-1 transition-all duration-400 tracking-wide">
-                        Batal
-                    </button>
-                </div>
-            </form>
+            <div class="border-t border-white/20 pt-8 md:pt-12 text-center text-cream-primary/80 text-sm md:text-base">
+                <p>&copy; 2024 Han Makeup Studio. Dibuat dengan 💖 di Wonosobo. Semua hak dilindungi.</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- [Sisa sections: Portfolio, Produk, Ulasan, Lokasi, Kontak, Footer tetap sama] -->
+    <!-- WhatsApp Floating Button - Mobile Priority -->
+    <a href="https://wa.me/6281234567890?text=Halo%20Han%20Makeup%2C%20saya%20mau%20booking%20makeup%20profesional!" 
+       class="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100] w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-gold-primary to-gold-dark rounded-full shadow-2xl shadow-gold-primary/40 flex items-center justify-center text-white text-xl md:text-2xl hover:scale-110 active:scale-95 transition-all duration-300 animate-pulse-glow group" target="_blank">
+        <span class="absolute -top-12 right-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-black/95 text-white text-xs px-4 py-2 rounded-full whitespace-nowrap shadow-lg z-10 pointer-events-none">
+            Chat WhatsApp
+        </span>
+        <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </a>
 
-    <!-- Enhanced JavaScript untuk Service Modal -->
+    <!-- Enhanced JavaScript - Mobile Priority -->
     <script>
-        // Service Modal Functions
-        function openServiceModal(id, title, desc, price, duration) {
-            const modal = document.getElementById('serviceModal');
-            const content = document.getElementById('modalContent');
-            const iconEl = document.getElementById('modalIcon');
-            const titleEl = document.getElementById('modalTitle');
-            const descEl = document.getElementById('modalDesc');
-            const priceEl = document.getElementById('modalPrice');
-            const durationEl = document.getElementById('modalDuration');
-            
-            // Set service data
-            const services = {
-                wisuda: { icon: '🎓', color: 'from-blush-primary to-blush-dark' },
-                wedding: { icon: '💍', color: 'from-nude-primary to-rose-gold' },
-                event: { icon: '✨', color: 'from-gold-primary to-gold-dark' },
-                home: { icon: '🚗', color: 'from-cream-primary to-nude-primary' },
-                special: { icon: '📸', color: 'from-rose-gold to-blush-primary' }
-            };
-            
-            const service = services[id];
-            iconEl.innerHTML = service.icon;
-            iconEl.style.background = `linear-gradient(135deg, ${service.color})`;
-            titleEl.textContent = title;
-            descEl.textContent = desc;
-            priceEl.innerHTML = `<div>${price}</div>`;
-            durationEl.textContent = `⏱️ Estimasi ${duration}`;
-            
-            // Show modal dengan animasi
-            content.classList.remove('service-form-enter');
-            content.classList.add('service-form-enter-active');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            
-            // Pre-fill date (next available)
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            document.getElementById('bookingDate').value = tomorrow.toISOString().split('T')[0];
+        // Enhanced AOS untuk Mobile Performance
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 80,
+            easing: 'ease-out-cubic',
+            disable: window.innerWidth < 768 ? 'mobile' : false
+        });
+
+        // Loading Screen - Faster Mobile
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loadingScreen');
+            loading.style.opacity = '0';
+            setTimeout(() => loading.remove(), 500);
+        });
+
+        // Smooth Scroll + Mobile Offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - (window.innerWidth < 768 ? 90 : 120);
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu
+                    document.getElementById('mobileMenu').classList.add('-translate-x-full');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+        });
+
+        // Navbar Scroll - Mobile Optimized
+        let ticking = false;
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-dark', 'shadow-lg');
+            } else {
+                navbar.classList.remove('glass-dark', 'shadow-lg');
+            }
         }
-        
-        function closeServiceModal() {
-            const modal = document.getElementById('serviceModal');
-            const content = document.getElementById('modalContent');
-            content.classList.add('service-form-enter');
-            content.classList.remove('service-form-enter-active');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                document.body.style.overflow = '';
-                document.getElementById('serviceForm').reset();
-                updateWhatsAppPreview();
-            }, 400);
-        }
-        
-        // Real-time WhatsApp Preview
-        document.getElementById('serviceForm').addEventListener('input', updateWhatsAppPreview);
-        
-        function updateWhatsAppPreview() {
-            const formData = {
-                name: document.getElementById('customerName').value,
-                phone: document.getElementById('customerPhone').value,
-                date: document.getElementById('bookingDate').value,
-                time: document.getElementById('bookingTime').value,
-                address: document.getElementById('customerAddress').value,
-                persons: document.getElementById('personCount').value,
-                notes: document.getElementById('specialNotes').value || 'Tidak ada catatan khusus'
-            };
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+                setTimeout(() => ticking = false, 100);
+            }
+        });
+
+        // Enhanced Mobile Menu
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburger = document.getElementById('hamburgerIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('-translate-x-full');
+            document.body.classList.toggle('menu-open');
+            hamburger.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close menu on outside click
+        document.addEventListener('click', e => {
+            if (!mobileBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.add('-translate-x-full');
+                document.body.classList.remove('menu-open');
+                hamburger.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        });
+
+        // Testimonial Carousel - Touch/Swipe Support
+        const carousel = document.getElementById('testimonialCarousel');
+        let startX = 0, currentTranslate = 0, prevTranslate = 0;
+        let isDragging = false, currentIndex = 0;
+
+        carousel.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            carousel.style.transition = 'none';
+        });
+
+        carousel.addEventListener('touchmove', e => {
+            if (!isDragging) return;
+            const currentX = e.touches[0].clientX;
+            currentTranslate = prevTranslate + currentX - startX;
+        });
+
+        carousel.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            const movedBy = currentTranslate - prevTranslate;
             
-            const serviceTitle = document.getElementById('modalTitle').textContent;
-            const preview = `Halo Han Makeup Studio! 
-
-📝 *Booking ${serviceTitle}*
-
-👤 Nama: ${formData.name}
-📱 WhatsApp: ${formData.phone}
-📅 Tanggal: ${formatDate(formData.date)}
-🕐 Waktu: ${formatTime(formData.time)}
-📍 Alamat: ${formData.address}
-👥 Jumlah: ${formData.persons}
-💬 Catatan: ${formData.notes}
-
-Mohon konfirmasi ketersediaan ya kak 😊
-
-Terima kasih! 💄✨`;
-            
-            document.getElementById('whatsappPreview').textContent = preview;
-        }
-        
-        // WhatsApp Auto Submit
-        document.getElementById('serviceForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Validate form
-            if (!this.checkValidity()) {
-                this.reportValidity();
-                return;
+            if (movedBy < -50 && currentIndex < 2) {
+                currentIndex++;
+            } else if (movedBy > 50 && currentIndex > 0) {
+                currentIndex--;
             }
             
-            // Get all form data
-            const formData = {
-                name: document.getElementById('customerName').value,
-                phone: document.getElementById('customerPhone').value,
-                date: document.getElementById('bookingDate').value,
-                time: document.getElementById('bookingTime').value,
-                address: document.getElementById('customerAddress').value,
-                persons: document.getElementById('personCount').value,
-                notes: document.getElementById('specialNotes').value || 'Tidak ada'
-            };
-            
-            const serviceTitle = document.getElementById('modalTitle').textContent;
-            
-            // Create WhatsApp message
-            const message = `Halo Han Makeup Studio! 
-
-📝 *PEMESANAN ${serviceTitle.toUpperCase()}*
-
-👤 *Nama*: ${formData.name}
-📱 *WhatsApp*: ${formData.phone}
-📅 *Tanggal*: ${formatDate(formData.date)} 
-🕐 *Waktu*: ${formatTime(formData.time)}
-📍 *Alamat*: ${formData.address}
-👥 *Jumlah Orang*: ${formData.persons}
-💰 *Layanan*: ${serviceTitle}
-💬 *Catatan Khusus*: ${formData.notes}
-
-*Mohon konfirmasi jadwal secepatnya ya kak!*
-Terima kasih 🙏💄✨`;
-            
-            // Open WhatsApp
-            const whatsappUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-            
-            // Close modal setelah 1 detik
-            setTimeout(closeServiceModal, 1000);
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            carousel.style.transition = 'transform 0.5s ease-in-out';
+            prevTranslate = currentIndex * -window.innerWidth;
         });
-        
-        // Helper functions
-        function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'];
-            return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+
+        // Auto play
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % 3;
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }, 5000);
+
+        // Form Handler
+        function handleSubmit(e) {
+            e.preventDefault();
+            // Simulate WhatsApp redirect
+            const phone = e.target.querySelector('input[type="tel"]').value;
+            window.open(`https://wa.me/6281234567890?text=Halo%20Han%20Makeup%2C%20nama%20saya%20${e.target[0].value}%20-%20${e.target[2].value}`, '_blank');
+            e.target.reset();
         }
-        
-        function formatTime(timeStr) {
-            const [hours, minutes] = timeStr.split(':');
-            const period = parseInt(hours) >= 12 ? 'M' : 'P';
-            const hour12 = parseInt(hours) % 12 || 12;
-            return `${hour12}:${minutes} ${period}`;
-        }
-        
-        // Close modal on backdrop click
-        document.getElementById('serviceModal').addEventListener('click', function(e) {
-            if (e.target === this) closeServiceModal();
-        });
-        
-        // ESC key close
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeServiceModal();
-        });
 
-        // [Previous JavaScript code tetap sama]
+        // Performance: Lazy load + Preload
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src || img.src;
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            document.querySelectorAll('img[loading="lazy"]').forEach(img => imageObserver.observe(img));
+        }
+
+        // PWA Ready - Mobile Detection
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+            document.documentElement.classList.add('mobile');
+        }
+
+        console.log('🎨 Han Makeup Studio - Mobile Optimized Loaded!');
+        console.log('📱 Perfect untuk Smartphone & Desktop');
+        console.log('✨ Auto-responsive - Zero configuration');
     </script>
 </body>
 </html>
